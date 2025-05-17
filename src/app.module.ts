@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { AdminUserModule } from './Admin/admin-user.module';
+import { AdminAuthModule } from './Admin/Auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -14,7 +16,12 @@ import { AuthModule } from './auth/auth.module';
     database: 'login',
     entities: [join(__dirname, '**/*.entity{.ts,.js}')],
     synchronize: true,
-  }), UserModule, AuthModule,],
+  }),
+    UserModule,
+    AuthModule,
+    AdminUserModule,
+    AdminAuthModule
+  ],
 
   controllers: [],
   providers: [],

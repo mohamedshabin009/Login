@@ -1,11 +1,10 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import * as bcrypt from 'bcrypt'
 import { AbstractEntity } from "src/abstract.entity";
-import { UserRole } from "./Enum/user.enum";
-import { IsMobilePhone } from "class-validator";
+import { BeforeInsert, Column, Entity } from "typeorm";
+import { AdminRole } from "./Enum/admin.enum";
+import * as bcrypt from 'bcrypt';
 
-@Entity({ name: 'users' })
-export class User extends AbstractEntity {
+@Entity({ name: 'admin_users' })
+export class AdminUser extends AbstractEntity {
 
   @Column({ nullable: true })
   name: string;
@@ -19,12 +18,12 @@ export class User extends AbstractEntity {
   @Column({ nullable: true })
   mobile_number: string;
 
-  @Column({ nullable: false, enum: UserRole })
+  @Column({ enum: AdminRole })
   role: string;
 
   @BeforeInsert()
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10)
   }
-}
 
+}

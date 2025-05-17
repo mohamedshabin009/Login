@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { LogIn } from 'src/auth/dto/logIn.dto';
 import { verifyPassword } from 'src/util';
 import { FindOneByEmail } from './interfaces/user.interface';
+import { UpdateUserDto } from './Dto/UpdateUserDto.dto';
 
 @Injectable()
 export class UserService {
@@ -39,7 +40,7 @@ export class UserService {
       const user = await this.userModel.findOne({
         where: { email: body.email },
       });
-      if (!user || !verifyPassword(body.password, user.password)) {
+      if (!user || ! await verifyPassword(body.password, user.password)) {
         throw new UnauthorizedException('Email or Password wrong');
       }
 
@@ -63,5 +64,35 @@ export class UserService {
     });
     if (!user) throw new BadRequestException('User not found')
     return user
+  }
+
+  async updateUser(id: string, body: UpdateUserDto) {
+    try {
+      await this.findUserById(id)
+
+      await this.userModel.update(id, body)
+      return {
+        Success: true,
+        message: 'User updated successfully'
+      }
+    } catch (error) {
+      throw new BadRequestException(error)
+    }
+  }
+
+  async deleteUser(id: string) {
+    try {
+
+      await this.findUserById(id)
+
+      await this.userModel.delete(id)
+      return {
+        Success: true,
+        message: 'User deleted successfully'
+      }
+
+    } catch (error) {
+      throw new BadRequestException(error)
+    }
   }
 }
