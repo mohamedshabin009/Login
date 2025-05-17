@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsNotEmpty, IsPhoneNumber, IsString, IsStrongPassword } from "class-validator";
+import { IsEmail, IsEnum, IsNotEmpty, IsPhoneNumber, IsString, IsStrongPassword } from "class-validator";
+import { UserRole } from "src/user/Enum/user.enum";
 
 export class SignUp {
   @ApiProperty()
@@ -24,4 +25,10 @@ export class SignUp {
   @IsPhoneNumber()
   @IsNotEmpty()
   mobile_number: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsEnum(UserRole)
+  @IsNotEmpty()
+  role: string;
 }
