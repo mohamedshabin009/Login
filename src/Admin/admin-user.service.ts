@@ -87,4 +87,15 @@ export class AdminUserService {
     }
   }
 
+  async getAllAdmin() {
+    try {
+      const admins = await this.adminUserRepository.find()
+      if (!admins) throw new BadRequestException('Admin not found')
+
+      return { success: true, admins }
+    } catch (error) {
+      throw new BadRequestException(error)
+    }
+  }
+
 }

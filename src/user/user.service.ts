@@ -71,6 +71,16 @@ export class UserService {
     return user
   }
 
+  async getAllUsers() {
+    try {
+      const users = await this.userModel.find()
+      if (users.length === 0) throw new BadRequestException('No user found')
+      return { success: true, users }
+    } catch (error) {
+      throw new BadRequestException(error)
+    }
+  }
+
   async updateUser(id: string, body: UpdateUserDto) {
     try {
       await this.findUserById(id)
