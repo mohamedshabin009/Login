@@ -16,6 +16,7 @@ import { AdminAuthModule } from './Admin/Auth/auth.module';
     database: 'login',
     entities: [join(__dirname, '**/*.entity{.ts,.js}')],
     synchronize: true,
+    logging: true,
   }),
     UserModule,
     AuthModule,

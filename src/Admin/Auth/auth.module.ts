@@ -3,6 +3,7 @@ import { AdminUserModule } from "../admin-user.module";
 import { AdminAuthService } from "./auth.service";
 import { AdminAuthController } from "./auth.controller";
 import { JwtModule } from "@nestjs/jwt";
+import { JwtAdminStrategy } from "src/Jwt/jwt.strategy";
 
 @Module({
   imports: [JwtModule.register({
@@ -11,7 +12,7 @@ import { JwtModule } from "@nestjs/jwt";
   }),
     AdminUserModule],
   controllers: [AdminAuthController],
-  providers: [AdminAuthService],
+  providers: [AdminAuthService, JwtAdminStrategy],
   exports: [AdminAuthService]
 })
 

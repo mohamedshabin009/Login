@@ -16,6 +16,10 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) { }
 
+  async findUser(id: string) {
+    return await this.userService.findUser(id);
+  }
+
   async signUp(body: SignUp) {
     return await this.userService.create(body);
   }

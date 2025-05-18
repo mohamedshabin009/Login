@@ -1,8 +1,11 @@
-import { Body, Controller, Post } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { AdminUserService } from "./admin-user.service";
 import { CreateAdminDto } from "./Dto/CreateAdmin.dto";
+import { JwtAdminAuthGuard } from "src/Jwt/jwt.guard";
 
+@ApiBearerAuth('Admin')
+@UseGuards(JwtAdminAuthGuard)
 @ApiTags('ADMIN-USER')
 @Controller('admin/user')
 export class AdminUserController {

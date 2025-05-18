@@ -28,6 +28,9 @@ export class AdminUserService {
     return await this.adminUserRepository.count()
   }
 
+  async findAdmin(id: string) {
+    return await this.adminUserRepository.findOne({ where: { id } })
+  }
 
   async findAdminById(id: string) {
     try {

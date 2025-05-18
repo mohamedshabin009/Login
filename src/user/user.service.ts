@@ -14,6 +14,11 @@ export class UserService {
     @InjectRepository(User)
     private readonly userModel: Repository<User>,
   ) { }
+
+  async findUser(id: string) {
+    return await this.userModel.findOne({ where: { id } })
+  }
+
   async create(body: SignUp) {
     try {
       const user = await this.userModel.findOne({

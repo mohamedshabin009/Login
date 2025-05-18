@@ -18,6 +18,9 @@ export class AdminAuthService implements OnModuleInit {
     }
   }
 
+  async findAdmin(id: string) {
+    return await this.adminUserService.findAdmin(id)
+  }
 
   async logIn(body: AdminLoginDto) {
     try {

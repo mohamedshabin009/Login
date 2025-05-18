@@ -30,5 +30,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
         error: error,
       });
     }
+    if (status === 401) {
+      const error = exception.response.message
+      response.status(status).json({
+        message: false,
+        error: error,
+      });
+    }
   }
 }
