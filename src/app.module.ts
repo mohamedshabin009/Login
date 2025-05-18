@@ -5,19 +5,10 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminUserModule } from './Admin/admin-user.module';
 import { AdminAuthModule } from './Admin/Auth/auth.module';
+import * as ormConfig from './orm.configuration'
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'root@123',
-    database: 'login',
-    entities: [join(__dirname, '**/*.entity{.ts,.js}')],
-    synchronize: true,
-    logging: true,
-  }),
+  imports: [TypeOrmModule.forRoot(ormConfig),
     UserModule,
     AuthModule,
     AdminUserModule,
